@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   getAuth,
   signInWithPopup,
@@ -5,6 +6,13 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+} from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -31,3 +39,15 @@ googleProvider.setCustomParameters({
 
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
+
+/*
+ * Database related
+ */
+
+export const db = getFirestore(firebaseApp);
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+  console.log(userSnapshot.exists());
+};
