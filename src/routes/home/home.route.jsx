@@ -1,8 +1,15 @@
-import categories from '../../categories.json';
-import CategoryCatalog from '../../components/catalog/catalog.component';
+import { Outlet } from "react-router";
+
+import categories from "../../categories.json";
+import CategoryCatalog from "../../components/catalog/catalog.component";
 
 const Home = () => {
-  return <CategoryCatalog categories={categories} />;
+  return (
+    <div>
+      <Outlet />
+      <CategoryCatalog categories={categories} />
+    </div>
+  );
 };
 
 export default Home;
