@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router";
+
 import Navigation from "./routes/navigation/navigation.component";
-import Home from "./routes/home/home.route";
-import Shop from "./routes/shop/shop.route";
-import SignIn from "./routes/sign-in/sign-in.route";
+import Home from "./routes/home/home.component";
+import Shop from "./routes/shop/shop.component";
+import SignIn from "./routes/sign-in/sign-in.component";
 
 const App = () => {
   return (
