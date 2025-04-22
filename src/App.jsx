@@ -1,8 +1,17 @@
-import categories from './categories.json';
-import CategoryCatalog from './components/catalog/catalog.component';
+import { Routes, Route } from "react-router";
+import Navigation from "./routes/navigation/navigation.component";
+import Home from "./routes/home/home.route";
+import Shop from "./routes/shop/shop.route";
 
 const App = () => {
-  return <CategoryCatalog categories={categories} />;
+  return (
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="shop" element={<Shop />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;
