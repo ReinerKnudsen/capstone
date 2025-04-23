@@ -46,6 +46,9 @@ googleProvider.setCustomParameters({
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
+export const signInWithCredentials = (email, password) =>
+  signInWithEmailAndPassword(auth, email, password);
+
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   console.log("Received User: ", email, password);
