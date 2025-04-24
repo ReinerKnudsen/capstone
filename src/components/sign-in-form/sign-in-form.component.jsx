@@ -34,9 +34,12 @@ const SignInForm = () => {
     event.preventDefault();
     if (!email || !password) return;
     try {
-      const { user } = await signInWithCredentials(email, password);
-      setFormFields(defaultFormFields);
-      console.log(user.email);
+      const response = await signInWithCredentials(email, password);
+      if (response) {
+        const user = response.user;
+        setFormFields(defaultFormFields);
+        console.log(user.email);
+      }
     } catch (error) {
       console.log('Error signing in', error);
     }
@@ -65,7 +68,7 @@ const SignInForm = () => {
         />
         <div className='sign-in-button-container'>
           <Button type='submit'>Sign In</Button>
-          <Button buttonType='google' onClick={handleGoogleSignIn}>
+          <Button type='button' buttonType='google' onClick={handleGoogleSignIn}>
             Sign In with Google
           </Button>
         </div>
