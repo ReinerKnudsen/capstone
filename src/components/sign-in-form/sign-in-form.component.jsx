@@ -1,5 +1,5 @@
 import './sign-in-form.styles.scss';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   signInWithGooglePopup,
   signInWithCredentials,
@@ -8,6 +8,7 @@ import {
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+import { UserContext } from '../../contexts/user.context';
 
 const defaultFormFields = {
   email: '',
@@ -17,6 +18,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleGoogleSignIn = async () => {
     const { user } = await signInWithGooglePopup();
@@ -37,8 +39,8 @@ const SignInForm = () => {
       const response = await signInWithCredentials(email, password);
       if (response) {
         const user = response.user;
+        setCurrentUser(user);
         setFormFields(defaultFormFields);
-        console.log(user.email);
       }
     } catch (error) {
       console.log('Error signing in', error);
