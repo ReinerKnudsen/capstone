@@ -13,7 +13,6 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     // Wir initialisieren den Auth State Listener, der anschließend aktiv ist
     const unsubscribe = onAuthStateChangeListener((user) => {
-      console.log('Auth state changed', user);
       user && createUserDocumentFromAuth(user);
       setCurrentUser(user);
     });
