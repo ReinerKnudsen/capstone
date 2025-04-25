@@ -7,6 +7,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc, getDoc, collection } from 'firebase/firestore';
@@ -75,6 +76,8 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   }
 };
 
+export const onAuthStateChangeListener = (callback) => onAuthStateChanged(auth, callback);
+
 /*
  * Database related
  */
@@ -82,22 +85,23 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const db = getFirestore(firebaseApp);
 
 export const createUserDocumentFromAuth = async (userAuth, additionalProps) => {
+  if (!userAuth) return;
   const userDocRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
-  if (userSnapshot.exists()) {
-    return userDocRef;
-  }
-  const { displayName, email } = userAuth;
-  const createdAt = new Date();
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
 
-  try {
-    await setDoc(userDocRef, {
-      displayName,
-      email,
-      createdAt,
-      ...additionalProps,
-    });
-  } catch (error) {
-    console.log('Error creating user document', error);
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalProps,
+      });
+    } catch (error) {
+      console.log('Error creating user document', error);
+    }
   }
+  return userDocRef;
 };
