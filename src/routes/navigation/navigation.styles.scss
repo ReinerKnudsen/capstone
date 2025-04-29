@@ -2,13 +2,15 @@
     height: 70px;
     width: 100%;
     display: flex;
+    align-content: center ;
     justify-content: space-between;
     margin-bottom: 25px;
 
     .logo-container {
         height: 100%;
         width: 70px;
-        padding: 25px;
+        padding: 10px;
+
     }
 
     .nav-links-container {
