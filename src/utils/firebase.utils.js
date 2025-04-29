@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import {
   getAuth,
   signInWithPopup,
@@ -48,8 +46,7 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
 export const signInWithCredentials = async (email, password) => {
   try {
@@ -72,11 +69,7 @@ export const signOutUser = () => signOut(auth);
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   try {
-    const response = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const response = await createUserWithEmailAndPassword(auth, email, password);
     return response;
   } catch (error) {
     switch (error.code) {
@@ -90,8 +83,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   }
 };
 
-export const onAuthStateChangeListener = (callback) =>
-  onAuthStateChanged(auth, callback);
+export const onAuthStateChangeListener = (callback) => onAuthStateChanged(auth, callback);
 
 /*
  * Database related
