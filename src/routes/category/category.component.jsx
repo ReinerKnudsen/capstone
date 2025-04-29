@@ -25,7 +25,7 @@ const Category = () => {
 
   return (
     <div className='category-view-container'>
-      <h2>{category}</h2>
+      <h2 className='category-view-title'>{category}</h2>
       <div className='category-container'>
         {products && products.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
