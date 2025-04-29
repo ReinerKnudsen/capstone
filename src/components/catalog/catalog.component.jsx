@@ -1,14 +1,14 @@
-import './catalog.styles.scss';
-
 import CategoryItem from '../category-item/category-item.component';
+
+import { CatalogContainer } from './catalog.styles.jsx';
 
 const CategoryCatalog = ({ categories }) => {
   return (
-    <div className='catalog-container'>
+    <CatalogContainer>
       {categories.map(({ title, id, imageUrl }) => (
         <CategoryItem key={id} title={title} imageUrl={imageUrl} />
       ))}
-    </div>
+    </CatalogContainer>
   );
 };
 

@@ -1,3 +1,15 @@
+import styled from 'styled-components';
+
+const BackgroundImage = styled.div`
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+transform: scale(1.1);
+transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+`;
+
+
 .category-item-container {
 	min-width: 30%;
 	height: 240px;
@@ -11,11 +23,6 @@
 
 	&:hover {
 		cursor: pointer;
-
-		& .background-image {
-			transform: scale(1.1);
-			transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-		}
 
 		& .category-body-container {
 			opacity: 0.9;
@@ -35,10 +42,7 @@
 	}
 
 	.background-image {
-		width: 100%;
-		height: 100%;
-		background-size: cover;
-		background-position: center;
+
 	}
 
 	.category-body-container {
