@@ -9,8 +9,17 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from 'firebase/auth';
+import {
+  collection,
+  writeBatch,
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  query,
+  getDocs,
+} from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, getDoc, collection } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -39,7 +48,8 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
 
 export const signInWithCredentials = async (email, password) => {
   try {
@@ -62,7 +72,11 @@ export const signOutUser = () => signOut(auth);
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   try {
-    const response = await createUserWithEmailAndPassword(auth, email, password);
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     return response;
   } catch (error) {
     switch (error.code) {
@@ -76,13 +90,43 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   }
 };
 
-export const onAuthStateChangeListener = (callback) => onAuthStateChanged(auth, callback);
+export const onAuthStateChangeListener = (callback) =>
+  onAuthStateChanged(auth, callback);
 
 /*
  * Database related
  */
 
 export const db = getFirestore(firebaseApp);
+
+export const addCollectionAndDocuments = async (
+  collectionKey, // name of collection
+  field, // key field of the object
+  objectsToAdd // data to add
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object[field].toLowerCase());
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+  console.log('done');
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+  return categoryMap;
+};
 
 export const createUserDocumentFromAuth = async (userAuth, additionalProps) => {
   if (!userAuth) return;
