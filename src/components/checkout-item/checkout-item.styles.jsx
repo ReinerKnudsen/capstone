@@ -27,6 +27,7 @@ export const CheckoutName = styled.span`
 export const CheckoutQuantity = styled.span`
   width: 23%;
   display: flex;
+  align-items: center;
 `;
 
 export const CheckoutPrice = styled.span`
