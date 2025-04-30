@@ -1,5 +1,10 @@
-import { BaseButton, GoogleSignInButton, InvertedButton } from './button.styles.jsx';
+import {
+  BaseButton,
+  GoogleSignInButton,
+  InvertedButton,
+} from './button.styles.jsx';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const BUTTON_TYPE_CLASSES = {
   base: 'base',
   google: 'google-sign-in',
