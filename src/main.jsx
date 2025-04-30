@@ -7,15 +7,18 @@ import { UserProvider } from './contexts/user.context';
 import { CategoriesProvider } from './contexts/categories.context';
 import { CartProvider } from './contexts/cart.context';
 
-import './index.scss';
+import { GlobalStyle, AppContainer } from './index.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <GlobalStyle />
     <BrowserRouter>
       <UserProvider>
         <CategoriesProvider>
           <CartProvider>
-            <App />
+            <AppContainer>
+              <App />
+            </AppContainer>
           </CartProvider>
         </CategoriesProvider>
       </UserProvider>
