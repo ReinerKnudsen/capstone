@@ -3,7 +3,12 @@ import { useContext, useEffect } from 'react';
 import { CartContext } from '../../contexts/cart.context';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
-import './checkout.styles.scss';
+import {
+  CheckoutContainer,
+  CheckoutHeader,
+  CheckoutHeaderBlock,
+  CheckoutTotal,
+} from './checkout.styles.jsx';
 
 const tableHeader = [
   { id: 1, title: 'Product' },
@@ -21,20 +26,20 @@ const Checkout = () => {
   }, []);
 
   return (
-    <div className='checkout-container'>
-      <div className='checkout-header'>
+    <CheckoutContainer>
+      <CheckoutHeader>
         {tableHeader.map((header) => (
-          <div key={header.id} className='header-block'>
+          <CheckoutHeaderBlock key={header.id}>
             <span>{header.title}</span>
-          </div>
+          </CheckoutHeaderBlock>
         ))}
-      </div>
+      </CheckoutHeader>
 
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <span className='total'>Total: € {cartTotal}</span>
-    </div>
+      <CheckoutTotal>Total: € {cartTotal}</CheckoutTotal>
+    </CheckoutContainer>
   );
 };
 

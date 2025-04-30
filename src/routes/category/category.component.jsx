@@ -5,7 +5,11 @@ import { CategoriesContext } from '../../contexts/categories.context';
 
 import ProductCard from '../../components/product-card/product-card.component';
 
-import './category.styles.scss';
+import {
+  CategoryViewContainer,
+  CategoryViewTitle,
+  CategoryContainer,
+} from './category.styles.jsx';
 
 const Category = () => {
   // get the current category from the url parameter
@@ -20,16 +24,18 @@ const Category = () => {
   // the data loads asyncronously; therefore `categoriesMap` might be empty on render; using the safeguard "products && products.map..." makes sure we only render if data is availables
   useEffect(() => {
     setProducts(categoriesMap[category]);
-    console.log(products);
   }, [categoriesMap, category]);
 
   return (
-    <div className='category-view-container'>
-      <h2 className='category-view-title'>{category}</h2>
-      <div className='category-container'>
-        {products && products.map((product) => <ProductCard key={product.id} product={product} />)}
-      </div>
-    </div>
+    <CategoryViewContainer>
+      <CategoryViewTitle>{category}</CategoryViewTitle>
+      <CategoryContainer>
+        {products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+      </CategoryContainer>
+    </CategoryViewContainer>
   );
 };
 
