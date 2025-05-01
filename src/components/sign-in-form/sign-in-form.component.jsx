@@ -31,7 +31,7 @@ const SignInForm = () => {
       const response = await signInWithCredentials(email, password);
       response && setFormFields(defaultFormFields);
     } catch (error) {
-      console.log('Error signing in', error);
+      console.error('Error signing in', error);
     }
   };
 
