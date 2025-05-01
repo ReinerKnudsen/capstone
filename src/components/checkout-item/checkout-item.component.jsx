@@ -11,6 +11,7 @@ import {
   CheckoutPrice,
   CheckoutArrow,
   CheckoutValue,
+  RemoveButton,
 } from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem }) => {
@@ -33,9 +34,7 @@ const CheckoutItem = ({ cartItem }) => {
         <CheckoutArrow onClick={increaseQuantityHandler}>&#10095;</CheckoutArrow>
       </CheckoutQuantity>
       <CheckoutPrice>{price}</CheckoutPrice>
-      <span className='remove-button' onClick={clearItemHandler}>
-        &#10005;
-      </span>
+      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
   );
 };

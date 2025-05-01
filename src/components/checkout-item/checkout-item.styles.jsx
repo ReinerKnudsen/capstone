@@ -42,7 +42,7 @@ export const CheckoutValue = styled.span`
   margin: 0 10px;
 `;
 
-// .remove-button {
-// 	padding-left: 12px;
-// 	cursor: pointer;
-// }
+export const RemoveButton = styled.span`
+  padding-left: 12px;
+  cursor: pointer;
+`;
