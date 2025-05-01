@@ -58,7 +58,7 @@ export const signInWithCredentials = async (email, password) => {
         alert('Invalid credentials');
         break;
       default:
-        console.log('Unknown error signing in');
+        console.error('Unknown error signing in');
     }
     return;
   }
@@ -77,7 +77,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
         alert('Cannot create user. Email is already in use.');
         break;
       default:
-        console.log('Unknown error signing up');
+        console.error('Unknown error signing up');
     }
     return;
   }
@@ -104,7 +104,6 @@ export const addCollectionAndDocuments = async (
     batch.set(docRef, object);
   });
   await batch.commit();
-  console.log('done');
 };
 
 export const getCategoriesAndDocuments = async () => {
@@ -136,7 +135,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalProps) => {
         ...additionalProps,
       });
     } catch (error) {
-      console.log('Error creating user document', error);
+      console.error('Error creating user document', error);
     }
   }
   return userDocRef;
