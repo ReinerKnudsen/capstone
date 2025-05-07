@@ -6,8 +6,8 @@ import { rootReducer } from './root-reducer';
 
 /** Root Reducer */
 
-/** Middleware receives an action before the redcuers get their hands on it */
+/** Middleware receives an action before the reducers get their hands on it */
 const middleWares = [logger];
-const composedEnhancers = compose(applyMiddleware(middleWares));
+const composedEnhancers = compose(applyMiddleware(...middleWares));
 
 export const store = legacy_createStore(rootReducer, undefined, composedEnhancers);
