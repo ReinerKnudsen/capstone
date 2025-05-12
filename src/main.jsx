@@ -7,8 +7,6 @@ import { store } from './store/store.js';
 
 import App from './App.jsx';
 
-import { CartProvider } from './contexts/cart.context';
-
 import { GlobalStyle, AppContainer } from './index.jsx';
 
 createRoot(document.getElementById('root')).render(
@@ -16,11 +14,9 @@ createRoot(document.getElementById('root')).render(
     <GlobalStyle />
     <Provider store={store}>
       <BrowserRouter>
-        <CartProvider>
-          <AppContainer>
-            <App />
-          </AppContainer>
-        </CartProvider>
+        <AppContainer>
+          <App />
+        </AppContainer>
       </BrowserRouter>
     </Provider>
   </StrictMode>
